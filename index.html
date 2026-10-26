@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Srijan Pradhan - Video Editor & Visual Designer CV</title>
+<style>
+/* ===== COLORS: yahan change karo ===== */
+:root{
+  --accent:#fbbf24;      /* buttons, badges, dots */
+  --accent-soft:rgba(251,191,36,.12);
+  --on-accent:#09090b;   /* text on accent buttons */
+  --bg:#09090b;          /* page background */
+  --card:#121214;        /* card background */
+  --border:#27272a;      /* borders */
+  --text:#d4d4d8;        /* body text */
+  --muted:#a1a1aa;       /* secondary text */
+  --heading:#fafafa;     /* titles */
+}
+/* ===================================== */
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--text);font:15px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+main{max-width:56rem;margin:0 auto;padding:48px 20px}
+a{color:inherit;text-decoration:none}
+h1{font-size:2.2rem;color:var(--heading);letter-spacing:-.02em}
+h2{font-size:1.1rem;color:var(--heading);border-bottom:1px solid var(--border);padding-bottom:8px;margin:44px 0 16px}
+h3{color:var(--heading);font-size:.95rem}
+.sub{color:var(--heading);font-size:1.1rem;margin-top:4px}
+.muted{color:var(--muted);font-size:.85rem}
+.btn{display:inline-block;background:var(--accent);color:var(--on-accent);font-weight:600;padding:10px 18px;border-radius:8px}
+.btn.sm{padding:7px 12px;font-size:.85rem;border-radius:6px;text-align:center}
+.btn.ghost{background:transparent;border:1px solid var(--border);color:var(--text);font-weight:500}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.pill{border:1px solid var(--border);border-radius:999px;padding:5px 13px;font-size:.85rem}
+.tag{display:inline-block;border:1px solid var(--border);background:var(--card);border-radius:6px;padding:2px 8px;font-size:.78rem;margin:0 6px 6px 0}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.tab{border:1px solid var(--border);background:none;color:var(--muted);border-radius:6px;padding:6px 12px;font:inherit;font-size:.85rem;cursor:pointer}
+.tab.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.grid{display:grid;gap:14px}
+.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}
+.card{border:1px solid var(--border);background:var(--card);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:8px;break-inside:avoid}
+.row{display:flex;justify-content:space-between;align-items:center;font-size:.78rem;color:var(--muted)}
+.badge{background:var(--accent-soft);color:var(--accent);font-weight:700;padding:1px 8px;border-radius:4px}
+
+/* ===== FULL DISPLAY MEDIA PLAYER BOX (VERTICAL / LANDSCAPE / POSTER) ===== */
+.media-box{position:relative;width:100%;aspect-ratio:var(--ar, 9/16);background:#050507;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin:2px 0;display:flex;align-items:center;justify-content:center}
+.media-box video,.media-box img,.media-box iframe{width:100%;height:100%;border:0;object-fit:contain;background:#050507;display:block}
+.media-box video{outline:none}
+.media-box img{cursor:zoom-in;transition:transform .2s ease}
+.media-box img:hover{transform:scale(1.02)}
+.media-empty{padding:12px;text-align:center;font-size:.76rem;color:var(--muted);line-height:1.4}
+
+/* Lightbox Modal for Full Image Poster Preview */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px}
+.lightbox.active{display:flex}
+.lightbox-content{max-width:92vw;max-height:92vh;position:relative;display:flex;flex-direction:column;align-items:center}
+.lightbox-content img{max-width:100%;max-height:86vh;border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,.8);object-fit:contain}
+.lightbox-close{position:absolute;top:-40px;right:0;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;line-height:1;padding:4px 8px}
+.lightbox-title{color:var(--heading);margin-top:10px;font-size:.9rem}
+
+.tl{border-left:1px solid var(--border);margin-left:5px}
+.tl>div{position:relative;padding:0 0 22px 22px;break-inside:avoid}
+.tl>div::before{content:"";position:absolute;left:-5px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--bg);border:1px solid var(--accent)}
+.stack{display:grid;grid-template-columns:12rem 1fr;gap:6px 16px;margin-bottom:12px}
+.cta{margin-top:44px;border:1px solid var(--border);background:var(--card);border-radius:12px;padding:18px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;break-inside:avoid}
+@media(max-width:760px){.g3{grid-template-columns:repeat(2,1fr)}.stack{grid-template-columns:1fr}}
+@media(max-width:520px){.g3,.g2{grid-template-columns:1fr}}
+@media print{.tabs,.media-box{display:none}main{padding:0}@page{margin:14mm;size:A4}.g3{grid-template-columns:repeat(3,1fr)}h2{break-after:avoid}}
+</style>
+</head>
+<body>
+<main id="app"></main>
+
+<script>
+/* ===== APNI DETAILS: yahan change karo ===== */
+const PROFILE = {
+  name: "Srijan Pradhan",
+  title: "Freelance Video Editor & Visual Designer (Short-Form Reels, Motion & Posters)",
+  location: "Vadodara, Gujarat, India (Available for Global Remote Work)",
+  pitch: "I help creators, coaches, and brands turn raw footage and concepts into scroll-stopping Reels, Shorts, motion promos, and ad creatives engineered for retention. Fast 24–48 hr turnaround, clean communication, zero ghosting.",
+  masterDrive: "https://drive.google.com/drive/folders/10y-qDOqIZUdM1lFE6E0Llz70JAG9ITcD?usp=sharing",
+  whatsapp: "https://wa.me/919316187048", phone: "+91 93161 87048",
+  email: "srijanpradhan.100@gmail.com",
+  linkedin: "https://www.linkedin.com/in/srijan-pradhan-1a7113241/",
+  instagram: "https://www.instagram.com/creation_pirate/",
+};
+
+/* 
+  category: "reels" | "motion" | "posters" | "story"
+  type: "video" | "image"
+  driveUrl: Bas normal Google Drive share link paste kar do!
+*/
+const VIDEO_SAMPLES = [
+  // --- 01 to 11: Connected with local Media folder (8 Videos + 3 Posters) ---
+  {id:"01",type:"video",category:"reels",title:"Online Summer Camp Registration Promo",software:"Capcut",details:"Event registration hook, dynamic callouts, upbeat pacing & clean transitions",duration:"0:06",ratio:"9/16",file:"Media/Online Summer camp registration.mp4",driveUrl:"https://drive.google.com/file/d/13ctyfqOCKPXcfZxqKIpT0CvicRtBVlTM/view?usp=drive_link"},
+  {id:"02",type:"video",category:"reels",title:"High-Retention Template Reel",software:"CapCut",details:"Beat-synced transitions, kinetic typography, and fast-paced social media formatting",duration:"0:25",ratio:"9/16",file:"Media/template reel.mp4",driveUrl:"#"},
+  {id:"03",type:"video",category:"reels",title:"BTI 5 Internship Recruitment Reel",software:"Premiere Pro",details:"Structured informational pacing, animated text highlights, and clear CTA delivery",duration:"1:27",ratio:"9/16",file:"Media/Bti 5 Internship.mp4",driveUrl:"#"},
+  {id:"04",type:"image",category:"posters",title:"Campa Cola Brand Ad Poster",software:"Canva / Chatgpt",details:"Beverage product manipulation, vibrant color grading, and bold retro-modern typography",duration:"Poster",ratio:"4/5",file:"Media/campa cola .jpeg",driveUrl:"#"},
+  {id:"05",type:"image",category:"posters",title:"Diet Coke Minimalist Ad Poster",software:"Canva / Chatgpt",details:"High-contrast lighting, condensation textures, and sleek commercial ad layout",duration:"Poster",ratio:"4/5",file:"Media/diet coke poster.jpeg",driveUrl:"#"},
+  {id:"06",type:"image",category:"posters",title:"Dot & Key Skincare Promotional Poster",software:"Canva / Chatgpt",details:"Clean D2C aesthetic, pastel color harmony, and product-hero visual hierarchy",duration:"Poster",ratio:"4/5",file:"Media/Dot & key poster.jpeg",driveUrl:"#"},
+  {id:"07",type:"video",category:"motion",title:"Creation pirate desk mate promo",software:"Gemini Flow",details:"UGC video ABout creation pirate desk setup mate",duration:"0:09",ratio:"9/16",file:"Media/Creation pirate desk mate promo.mp4",driveUrl:"#"},
+  {id:"08",type:"video",category:"motion",title:"INJ Partner Diwali Festive Promo",software:"Premiere Pro",details:"Festive particle overlays, warm color grading, and celebratory brand motion design",duration:"0:10",ratio:"9/16",file:"Media/INJ PARTNER DIWALI.mp4",driveUrl:"#"},
+  {id:"09",type:"video",category:"motion",title:"Dynamic Brand & Roster Reveals",software:"DaVinci Resolve",details:"Fast-cut reveal sequence, glitch accents, speed ramps, and whoosh/hit SFX layers",duration:"0:20",ratio:"9/16",file:"Media/reveals.mp4",driveUrl:"#"},
+  {id:"10",type:"video",category:"reels",title:"Srijan EC_IL Innovation Showcase",software:"Premiere Pro",details:"Personal leadership highlight reel, dynamic framing, and crisp audio mastering",duration:"1:43",ratio:"9/16",file:"Media/Srijan EC IL.mp4",driveUrl:"#"},
+  {id:"11",type:"video",category:"motion",title:"Animated Thumbnail & Motion Loop (thumb.mp4)",software:"CapCut",details:"Scroll-stopping visual hook, punch-in motion keyframes, and high-contrast styling",duration:"0:15",ratio:"9/16",file:"Media/thumb.mp4",driveUrl:"#"},
+
+  {id:"12",type:"video",category:"story",title:"Bti internship 5 promo reel",software:"Capcut + DaVinci",details:"Promotional video that attracts 10+ interns to join this NGO ANON",duration:"1:30",ratio:"9/16",file:"Media/Bti 5 promo reel.mp4",driveUrl:"#"},
+
+  /* --- Baad me jab 13 se 16 videos add karne ho, tab inko uncomment/use karein ---
+  {id:"13",type:"video",category:"reels",title:"Naya Video 13",software:"Premiere Pro",details:"Description yahan likhein",duration:"0:30",ratio:"9/16",file:"Media/video13.mp4",driveUrl:"#"},
+  {id:"14",type:"video",category:"reels",title:"Naya Video 14",software:"CapCut",details:"Description yahan likhein",duration:"0:30",ratio:"9/16",file:"Media/video14.mp4",driveUrl:"#"},
+  {id:"15",type:"video",category:"reels",title:"Naya Video 15",software:"DaVinci Resolve",details:"Description yahan likhein",duration:"0:30",ratio:"9/16",file:"Media/video15.mp4",driveUrl:"#"},
+  {id:"16",type:"video",category:"reels",title:"Naya Video 16",software:"Premiere Pro",details:"Description yahan likhein",duration:"0:30",ratio:"9/16",file:"Media/video16.mp4",driveUrl:"#"},
+  */
+];
+
+const CAPABILITIES = [
+  ["Hook & Retention Engineering","First 3-second visual hooks, pattern interrupts, and dead-air removal to maximize watch time."],
+  ["Motion Graphics & Dynamic Captions","Engaging typography, keyframe animations, and visual callouts."],
+  ["Sound Design & Audio Mastering","Crisp voice cleanup, risers, whooshes, hits, and balanced background music."],
+  ["Ad Posters & Visual Polish","Cinematic color grading (DaVinci Resolve), D2C product posters, and scroll-stopping thumbnails."],
+];
+const EXPERIENCE = [
+  ["Freelance Video Editor & Visual Designer","","Present","Editing high-retention short-form content (Reels/Shorts), promotional campaigns, and social media visuals for creators and brands with consistent 24–48 hour turnaround times."],
+  ["Executive Council Lead Facilitator (EC-LF)","ANON Global Foundation","Oct 2026 – Present","Leading cross-functional teams, managing content workflows, and ensuring strict deadline execution across organizational initiatives."],
+  ["Executive Council Innovation Head (EC-IL)","ANON Global Foundation","Feb 2026 – Oct 2026","Directed end-to-end video production, promotional reels, motion graphics, event branding, and digital media operations for the foundation."],
+];
+const STACK = [
+  ["Video Editing & Color",["Adobe Premiere Pro","DaVinci Resolve","CapCut Pro"]],
+  ["Captions & AI Workflow",["Caption AI","Auto-Subtitling","Custom Animated Presets"]],
+  ["Thumbnails & Graphic Assets",["Figma","Canva","Photopea"]],
+  ["Delivery & Collaboration",["Google Drive (Organized Project Folders)","Frame.io / Quick Revisions"]],
+];
+const EDUCATION = ["Bachelor of Computer Applications (BCA)","Sigma University, Vadodara (Semester 5 | CGPA: 8.0+)"];
+const FILTERS = [
+  ["all","All Work"],
+  ["reels","Reels & Shorts"],
+  ["motion","Motion & Reveals"],
+  ["posters","Ad Posters (Images)"],
+  ["story","Storytelling & Color"]
+];
+/* ===== EDIT ZONE END ===== */
+
+const P = PROFILE;
+const tags = a => a.map(t => `<span class="tag">${t}</span>`).join("");
+const ext = 'target="_blank" rel="noopener noreferrer"';
+let filter = "all";
+
+function getDriveId(url) {
+  if (!url || url === "#") return null;
+  const m = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+  return m ? m[1] : null;
+}
+
+function renderMedia(s) {
+  const ar = s.ratio || (s.category === "posters" ? "4/5" : "9/16");
+  if (s.file) {
+    const enc = encodeURI(s.file);
+    if (s.type === "image") {
+      return `<div class="media-box" style="--ar:${ar}">
+        <img src="${enc}" alt="${s.title}" loading="lazy" onclick="openLightbox('${enc}','${s.title.replace(/'/g, "\\'")}')" title="Click to view full poster">
+      </div>`;
+    }
+    const posterAttr = s.poster ? ` poster="${encodeURI(s.poster)}"` : '';
+    const srcWithTime = enc.includes('#') ? enc : `${enc}#t=0.5`;
+    return `<div class="media-box" style="--ar:${ar}">
+      <video src="${srcWithTime}"${posterAttr} controls playsinline preload="metadata"></video>
+    </div>`;
+  }
+  const id = getDriveId(s.driveUrl);
+  if (!id) {
+    return `<div class="media-box" style="--ar:${ar}"><div class="media-empty">📋 Add file path in <b>file</b> or paste Google Drive link in <b>driveUrl</b></div></div>`;
+  }
+  const previewUrl = `https://drive.google.com/file/d/${id}/preview`;
+  if (s.type === "image") {
+    const imgUrl = `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
+    return `<div class="media-box" style="--ar:${ar}">
+      <img src="${imgUrl}" alt="${s.title}" loading="lazy" onerror="this.outerHTML='<iframe src=\\'${previewUrl}\\' loading=\\'lazy\\'></iframe>'">
+    </div>`;
+  }
+  return `<div class="media-box" style="--ar:${ar}"><iframe src="${previewUrl}" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe></div>`;
+}
+
+function cards() {
+  const list = filter === "all" ? VIDEO_SAMPLES : VIDEO_SAMPLES.filter(v => v.category === filter);
+  return list.map(s => {
+    const isImg = s.type === "image";
+    const metaLabel = isImg ? "🖼 Image Poster" : `🎬 ${s.duration}s`;
+    let btnHref = "#";
+    let btnLabel = "↗ Open in Drive";
+    let btnOnClick = "";
+    let btnExt = ext;
+    if (isImg) {
+      if (s.file) {
+        btnHref = "javascript:void(0)";
+        btnOnClick = `onclick="openLightbox('${encodeURI(s.file)}','${s.title.replace(/'/g, "\\'")}')"`;
+        btnLabel = "🔍 View Full Poster";
+        btnExt = "";
+      } else if (s.driveUrl && s.driveUrl !== "#") {
+        btnHref = s.driveUrl;
+        btnLabel = "🔍 View in Drive ↗";
+      } else {
+        btnLabel = "🔍 View Poster";
+      }
+    } else {
+      if (s.driveUrl && s.driveUrl !== "#") {
+        btnHref = s.driveUrl;
+        btnLabel = "↗ Open in Drive";
+      } else if (s.file) {
+        btnHref = encodeURI(s.file);
+        btnLabel = "↗ Full Window Video";
+      } else {
+        btnLabel = "↗ Open Video";
+      }
+    }
+    return `
+    <article class="card">
+      <div class="row"><span class="badge">#${s.id}</span><span>${metaLabel}</span></div>
+      ${renderMedia(s)}
+      <h3>${s.title}</h3>
+      <p class="muted" style="flex:1">${s.details}</p>
+      <div>${tags([s.software])}</div>
+      <a class="btn sm ghost" href="${btnHref}" ${btnOnClick} ${btnExt}>${btnLabel}</a>
+    </article>`;
+  }).join("");
+}
+
+function tabs() {
+  return FILTERS.map(([k, l]) => {
+    const n = k === "all" ? VIDEO_SAMPLES.length : VIDEO_SAMPLES.filter(v => v.category === k).length;
+    return `<button class="tab ${filter === k ? "on" : ""}" data-k="${k}">${l} (${n})</button>`;
+  }).join("");
+}
+
+function render() {
+  document.getElementById("app").innerHTML = `
+  <header>
+    <h1>${P.name}</h1>
+    <p class="sub">${P.title}</p>
+    <p class="muted" style="margin-top:6px">📍 ${P.location}</p>
+    <p style="margin:16px 0;max-width:42rem">${P.pitch}</p>
+    <a class="btn" href="${P.masterDrive}" ${ext}>📁 Open Master Google Drive Folder ↗</a>
+    <div class="pills">
+      <a class="pill" href="${P.whatsapp}" ${ext}>WhatsApp / ${P.phone}</a>
+      <a class="pill" href="mailto:${P.email}">Email</a>
+      <a class="pill" href="${P.linkedin}" ${ext}>LinkedIn</a>
+      <a class="pill" href="${P.instagram}" ${ext}>Instagram</a>
+    </div>
+  </header>
+  <h2>Proof of Work: Video Edits &amp; Ad Creatives (Playable Below)</h2>
+  <div class="tabs" id="tabs">${tabs()}</div>
+  <div class="grid g3" id="cards">${cards()}</div>
+  <h2>Core Editing Capabilities</h2>
+  <div class="grid g2">${CAPABILITIES.map(([t, d]) => `<div class="card"><h3>${t}</h3><p class="muted">${d}</p></div>`).join("")}</div>
+  <h2>Experience &amp; Reliability</h2>
+  <div class="tl">${EXPERIENCE.map(([r, o, p, d]) => `<div>
+    <div class="row" style="font-size:.95rem"><h3>${r}${o ? ` <span class="muted">· ${o}</span>` : ""}</h3><span>${p}</span></div>
+    <p class="muted" style="margin-top:4px">${d}</p></div>`).join("")}</div>
+  <h2>Software &amp; Workflow Stack</h2>
+  ${STACK.map(([l, t]) => `<div class="stack"><h3>${l}</h3><div>${tags(t)}</div></div>`).join("")}
+  <h2>Education</h2>
+  <h3>${EDUCATION[0]}</h3><p class="muted">${EDUCATION[1]}</p>
+  <div class="cta">
+    <p style="max-width:30rem;color:var(--heading)">Want a quick test edit or ready to scale your content? Reach out directly on WhatsApp or Email.</p>
+    <div style="display:flex;gap:8px"><a class="btn sm" href="${P.whatsapp}" ${ext}>WhatsApp</a><a class="pill" href="mailto:${P.email}">Email</a></div>
+  </div>
+  <div id="lightbox" class="lightbox" onclick="if(event.target===this)closeLightbox()">
+    <div class="lightbox-content">
+      <button class="lightbox-close" onclick="closeLightbox()" title="Close">&times;</button>
+      <img id="lightbox-img" src="" alt="Poster preview">
+      <div id="lightbox-title" class="lightbox-title"></div>
+    </div>
+  </div>`;
+  document.getElementById("tabs").onclick = e => {
+    const k = e.target.dataset.k; if (!k) return;
+    filter = k;
+    document.getElementById("tabs").innerHTML = tabs();
+    document.getElementById("cards").innerHTML = cards();
+  };
+}
+
+function openLightbox(src, title) {
+  const lb = document.getElementById("lightbox");
+  const img = document.getElementById("lightbox-img");
+  const caption = document.getElementById("lightbox-title");
+  if (lb && img) {
+    img.src = src;
+    caption.textContent = title;
+    lb.classList.add("active");
+  }
+}
+
+function closeLightbox() {
+  const lb = document.getElementById("lightbox");
+  if (lb) lb.classList.remove("active");
+}
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") closeLightbox();
+});
+
+// Auto-pause other videos when one starts playing
+document.addEventListener('play', function(e) {
+  const vids = document.querySelectorAll('video');
+  vids.forEach(v => {
+    if (v !== e.target) v.pause();
+  });
+}, true);
+
+render();
+</script>
+</body>
+</html>
